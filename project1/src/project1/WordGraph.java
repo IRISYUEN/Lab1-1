@@ -1,57 +1,45 @@
-package project1;
-//change
-import java.io.*;
+package l1;
+
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.*;
 
-/**
+/**.
  * class WordGraph
  */
 public class WordGraph {
 
-    /**
-     * filename
-     */
-    private String filename;
+  
+  private String filename;
 
-    /**
-     * all the words
-     */
-    private List<String> words;
+    
+  private List<String> words;
 
-    /**
-     * the graph
-     */
-    public static int[][] graph=new int [30][30];
+    
+  public static int[][] graph = new int [30][30];
 
-    /**
-     * Constructor to load data from filename
-     *
-     * @param filename the filename
-     */
-    public WordGraph(String filename) {
-        this.filename = filename;
-        initData();
-    }
+  public WordGraph(final String filename) {
+    this.filename = filename;
+    initData();
+  }
 
-    /**
-     * Query bridge words
-     *
-     * @param word1 the first word
-     * @param word2 the second word
-     * @return the bridge word
-     */
-    public String queryBridgeWords(String word1, String word2) {
-        for (int i=0;i<graph.length;i++)
-        {
-            for (int j=0;j<graph.length;j++)
-                System.out.print(graph[i][j]+" ");
-            System.out.print("\n");
-        }
-        for (int j=0;j<words.size();j++)
-            System.out.print(words.get(j)+" ");
+  public String queryBridgeWords(final String word1, String word2) {
+    for (int i = 0;i < graph.length;i++) {
+      for (int j = 0;j < graph.length;j++) {
+      System.out.print(graph[i][j] + " ");
+    		System.out.print("\n");
+    		}
+    	}
+    	for (int j = 0;j < words.size();j++) {	
+    		System.out.print(words.get(j) + " ");
+    	}
         String result = "";
         boolean containsWord1 = words.contains(word1);
-        boolean containsWord2 = words.contains(word2);
+        final boolean containsWord2 = words.contains(word2);
         if (containsWord1 && containsWord2) {
             int firstIndex = words.indexOf(word1);
             int secondIndex = words.indexOf(word2);
@@ -68,9 +56,12 @@ public class WordGraph {
                 }
             }
             if (exists) {
-                result = "The bridge words from \"" + word1 + "\" to \"" + word2 + "\" is: " + words.get(midIndex);
+                result = "The bridge words from \"" 
+            + word1 + "\" to \"" + word2 + "\" is: " 
+                    + words.get(midIndex);
             } else {
-                result = "No bridge words from \"" + word1 + "\" to \"" + word2 + "\"!";
+                result = "No bridge words from \"" 
+            + word1 + "\" to \"" + word2 + "\"!";
             }
         } else if (!containsWord1 && containsWord2) {
             result = "NO \"" + word1 + "\" in the graph!";
@@ -83,14 +74,15 @@ public class WordGraph {
     }
 
     /**
-     * find the shortest path
+     * find the shortest path.
      *
      * @param word1 the first word
      * @param word2 the second word
      * @return the shortest path
      */
     public String calcShortestPath(String word1, String word2) {
-        String result = "The path from \"" + word1 + "\" to \"" + word2 + "\" is:  ";
+        String result = "The path from \"" 
+    + word1 + "\" to \"" + word2 + "\" is:  ";
         boolean containsWord1 = words.contains(word1);
         boolean containsWord2 = words.contains(word2);
         if (containsWord1 && containsWord2) {
@@ -122,7 +114,8 @@ public class WordGraph {
                     }
                 }
             } else {
-                result = "There are no path from \" " + word1 + "\" to \"" + word2 + "\"!";
+                result = "There are no path from \" " 
+            + word1 + "\" to \"" + word2 + "\"!";
             }
 
         } else if (!containsWord1 && containsWord2) {
@@ -137,14 +130,15 @@ public class WordGraph {
     }
 
     /**
-     * Find all path with Depth First Search
+     * Find all path with Depth First Search.
      *
      * @param allpaths     the list of all paths
      * @param visitedIndex the visited index list
      * @param startIndex   start index
      * @param endIndex     end index
      */
-    private void depthFirstSearch(List<List<Integer>> allpaths, Stack<Integer> visitedIndex, int startIndex, int endIndex) {
+    private void depthFirstSearch(List<List<Integer>> allpaths,
+        Stack<Integer> visitedIndex, int startIndex, int endIndex) {
         if (startIndex == endIndex) {
             List<Integer> path = new ArrayList<>(visitedIndex);
             allpaths.add(path);
@@ -161,7 +155,7 @@ public class WordGraph {
     }
 
     /**
-     * @return the random walk path
+     * the random walk path.
      */
     public String randomWalk() {
         // to generate a random number
@@ -185,13 +179,14 @@ public class WordGraph {
     }
 
     /**
-     * Find all path
+     * Find all path.
      *
      * @param allpaths     all path
      * @param visitedIndex the visited index list
      * @param startIndex   the index
      */
-    private void dfsRandomWalk(List<List<Integer>> allpaths, Stack<Integer> visitedIndex, int startIndex) {
+    private void dfsRandomWalk(List<List<Integer>> allpaths, 
+        Stack<Integer> visitedIndex, int startIndex) {
         // duplicate edge
         if (visitedIndex.contains(startIndex)) {
             int index = visitedIndex.indexOf(startIndex);
@@ -233,9 +228,10 @@ public class WordGraph {
         }
         //pop
         visitedIndex.pop();
+        return;
     }
 
-    /**
+    /**.
      * initial data
      */
     private void initData() {
@@ -253,7 +249,8 @@ public class WordGraph {
                 // filt the word
                 for (int i = 0; i < line.length(); i++) {
                     char ch = line.charAt(i);
-                    if (('a' <= ch && ch <= 'z') || ('A' <= ch && ch <= 'Z') || ' ' == ch) {
+                    if (('a' <= ch && ch <= 'z') 
+                    	|| ('A' <= ch && ch <= 'Z') || ' ' == ch) {
                         temp.append(ch);
                     }
                 }
@@ -294,7 +291,7 @@ public class WordGraph {
     }
 
     /**
-     * Application help inforation
+     * Application help information.
      */
     private static void help() {
         System.out.println("********* Welcome to this application *********");
@@ -302,31 +299,34 @@ public class WordGraph {
         System.out.println("2. Caculate Shortest Path between two words");
         System.out.println("3. Randomly Walk");
         System.out.println("4. Quit");
-        //System.out.println("5. Show the graph");
+        System.out.println("5. Show the graph");
     }
-
+    
     public static void write(String file, String conent) {
-        BufferedWriter out = null;
-        try {
-            out = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream(file, true)));
-            out.write(conent);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if(out!=null) out.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+		BufferedWriter out = null;
+		try {
+		out = new BufferedWriter(new OutputStreamWriter(
+		new FileOutputStream(file, true)));
+		out.write(conent);
+		} catch (Exception e) {
+		e.printStackTrace();
+		} finally {
+		try {
+		  if (out != null) {
+		    out.close();
+		    }
+		} catch (IOException e) {
+		e.printStackTrace();
+		}
+		}
+		}
     /**
-     * To solve user input
+     * To solve user input.
      *
      * @param in the input stream
      * @return String[] two words from user's input
      */
+    
     private static String[] sovleInputString(Scanner in) {
         String line;
         System.out.print("Please input two words: ");
@@ -344,11 +344,12 @@ public class WordGraph {
     //main method
     public static void main(String[] args) {
         //if (args.length != 1) {
-        //  System.out.println("Invalid Parameters, please run with java WordGraph <filename>");
-        //System.exit(0);
-        //}
-        //String filename = null;
-        String filename = "C:\\Users\\ThinkPad\\Desktop\\Lab4\\Lab4\\project1\\src\\project1\\data.txt";
+          //  System.out.println("Invalid Parameters, please run with java WordGraph <filename>");
+            //System.exit(0);
+      //  }
+    	System.out.println("Please input file address:");
+    	Scanner input = new Scanner(System.in);
+    	String filename = input.nextLine();
         //String filename = args[0];
         WordGraph wordGraph = new WordGraph(filename);
         Scanner in = new Scanner(System.in);

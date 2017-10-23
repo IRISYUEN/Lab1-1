@@ -1,32 +1,29 @@
-package project1;
-import java.util.ArrayList;  
+package l1;
+
+import java.util.ArrayList; 
+
 public class test2 {
-	 //ÓĞÏò´øÈ¨Í¼¡£-1±íÊ¾ÎŞÂ·¿ÉÍ¨¡£×Ô¼ºµ½×Ô¼ºÒ²ÊÇ-1¡£ÆäËü±íÊ¾È¨Öµ¡£
-
-	static int[][] graph;
-    static int length=graph.length;
-    private static boolean[] hasFlag=new boolean[graph.length];
-    //true-±íÊ¾¸Ã½áµãÒÑ·ÃÎÊ¹ı¡£false-±íÊ¾»¹Ã»ÓĞ·ÃÎÊ¹ı¡£
+  static int[][] graph;
+  static int length = graph.length;
+  private static boolean[] hasFlag = new boolean[graph.length];
      
-     static ArrayList<String> res=new ArrayList<String>();
-    //×îºóµÄËùÓĞµÄÂ·¾¶µÄ½á¹û¡£Ã¿Ò»ÌõÂ·¾¶µÄ¸ñÊ½ÊÇÈç£º0->2->1->3:7
+  static ArrayList<String> res = new ArrayList<String>();
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğµï¿½Â·ï¿½ï¿½ï¿½Ä½ï¿½ï¿½ï¿½ï¿½Ã¿Ò»ï¿½ï¿½Â·ï¿½ï¿½ï¿½Ä¸ï¿½Ê½ï¿½ï¿½ï¿½ç£º0->2->1->3:7
      
-    //ÇóÔÚÍ¼graphÉÏÔ´µãsµ½Ä¿±êµãdÖ®¼äËùÓĞµÄ¼òµ¥Â·¾¶£¬²¢Çó³öÂ·¾¶µÄºÍ¡£   
-    public static void getPaths(int s,int d,String path,int sum)
-    {
-        hasFlag[s]=true;//Ô´µãÒÑ·ÃÎÊ¹ı. 
-     for(int i=0;i<length;i++)
-     {
+    //ï¿½ï¿½ï¿½ï¿½Í¼graphï¿½ï¿½Ô´ï¿½ï¿½sï¿½ï¿½Ä¿ï¿½ï¿½ï¿½dÖ®ï¿½ï¿½ï¿½ï¿½ï¿½ĞµÄ¼ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ÄºÍ¡ï¿½   
+  public static void getPaths(int s,int d,String path,int sum){
+    hasFlag[s] = true;//Ô´ï¿½ï¿½ï¿½Ñ·ï¿½ï¿½Ê¹ï¿½. 
+    for (int i = 0;i < length;i++) {
 
-        if (graph[s][i]==-1 || hasFlag[i]){continue;}
-        //ÈôÎŞÂ·¿ÉÍ¨»òÒÑ·ÃÎÊ¹ı£¬ÔòÕÒÏÂÒ»¸ö½áµã¡£
+      if (graph[s][i]==-1 || hasFlag[i]){continue; }
+        //ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½Í¨ï¿½ï¿½ï¿½Ñ·ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ã¡£
  
-        if(i==d)//ÈôÒÑÕÒµ½Ò»ÌõÂ·¾¶
+      if (i == d)//ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½Ò»ï¿½ï¿½Â·ï¿½ï¿½
         { 
-            res.add(path+"->"+d+":"+(sum+graph[s][i]));//¼ÓÈë½á¹û¡£
+            res.add(path+"->"+d+":"+(sum+graph[s][i]));//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             continue;
         }
-        getPaths(i, d, path+"->"+i, sum+graph[s][i]);//¼ÌĞøÕÒ
+        getPaths(i, d, path+"->"+i, sum+graph[s][i]);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         hasFlag[i]=false;       
      }//for(i)
     }
@@ -41,9 +38,9 @@ public class test2 {
 			}
 			System.out.print("\n");
 		}
-      getPaths(0, 3, ""+0, 0);//´ÓÔ´µã£º0 µ½Ä¿µã£º3,³õÊ¼Â·¾¶£º"0" ³õÊ¼ºÍ£º0
+      getPaths(0, 3, ""+0, 0);//ï¿½ï¿½Ô´ï¿½ã£º0 ï¿½ï¿½Ä¿ï¿½ã£º3,ï¿½ï¿½Ê¼Â·ï¿½ï¿½ï¿½ï¿½"0" ï¿½ï¿½Ê¼ï¿½Í£ï¿½0
       System.out.println(length);
-      for(String e:res)//´òÓ¡ËùÓĞµÄ½á¹û
+      for(String e:res)//ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ĞµÄ½ï¿½ï¿½
       {
           System.out.println(e);
       }
